@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "GamePlay.h"
 #include "Player.h"
 #include "UserInterfaceConsole.h"
@@ -8,6 +10,8 @@ int main() {
     ViewType viewType = Console;
     if (viewType == Console) {
         ChessBoard cB;
+        cB.printBoard();
+
         UserInterfaceConsole uI;
         Player w(White, &cB, &uI);
         Player b(Black, &cB, &uI);

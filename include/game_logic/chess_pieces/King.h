@@ -3,7 +3,8 @@
 
 class King : public ChessPiece {
     public:
-        King(std::vector<int> square, Color pieceColor, ChessBoard* board);
-        bool isLegalMove(std::vector<int> square);
+        King(Location square, Color pieceColor, ChessBoard* board);
+        bool isLegalMove(Location square);
+        char getCharacter() const  { return 'K'; }
     private:
 };

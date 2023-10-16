@@ -1,37 +1,60 @@
 #pragma once
 #include <vector>
 #include <array>
-#include "ChessPiece.h"
-#include "Bishop.h"
-#include "King.h"
-#include "Knight.h"
-#include "Pawn.h"
-#include "Queen.h"
-#include "Rook.h"
+#include <cstdint>
+
+#include "forward.h"
+#include "alias.h"
+
 #include "Enums.h"
 
 class ChessBoard {
     public:
         ChessBoard();
         ~ChessBoard();
-        ChessPiece* getPieceAt(std::vector<int> square) {
-            return boardSpaces.at(square.at(1)).at(square.at(0));
-        }
-        void setPieceAt(std::vector<int> endSquare, ChessPiece* piece);
+
+        ChessPiece* getPieceAt(Location square);
+
+        void setPieceAt(Location endSquare, ChessPiece* piece);
+
+        void removePieceAt(Location square);
+
+        Location getLocation(const ChessPiece* piece) const;
+
         void setNextMoveEnPassant(bool isEnPassant) {
             nextMoveEnPassant = isEnPassant;
         }
+
         void setNextMoveCastle(bool isCastle) {
             nextMoveCastle = isCastle;
         }
+
         void setNextMovePromoting(bool isPromoting) {
             nextMovePromoting = isPromoting;
         }
+
+        void cleanState(Color color);
+
         GameState checkGameState(Color colorTurn);
-        bool canCastle(ChessPiece* piece, std::vector<int> sqaure);
-        bool kingIsProtected(ChessPiece* piece, std::vector<int> square);
+
+        bool canCastle(ChessPiece* piece, Location sqaure);
+
+        bool kingIsProtected(ChessPiece* piece, Location square);
+
+        void printBoard() const;
+
+        // helper functions
+
+        ChessPiece* collisionLine(Location start, Location end, bool endInclusive = true); // return the first piece that collides with the line - includes the last square if endInclusive is enabled - nullptr on error
+
+
     private:
-        std::array<std::array<ChessPiece*, 8>, 8> boardSpaces = {};
+        const uint32_t boardWidth = 8;
+        const uint32_t boardHeight = 8;
+        std::array<ChessPiece*, 64> rawBoard;
+
+        // std::array<std::array<ChessPiece*, 8>, 8> boardSpaces = {};
+
         bool nextMoveEnPassant;
         bool nextMoveCastle;
         bool nextMovePromoting;

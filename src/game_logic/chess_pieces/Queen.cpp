@@ -1,10 +1,15 @@
 #include "Queen.h"
-Queen::Queen(std::vector<int> square, Color pieceColor, ChessBoard* board) {
-    location = square;
+#include "ChessBoard.h"
+
+Queen::Queen(Location square, Color pieceColor, ChessBoard* board) {
     color = pieceColor;
     pieceBoard = board;
     movedYet = false;
 }
-bool Queen::isLegalMove(std::vector<int> square) {
-    
+
+bool Queen::isLegalMove(Location square) {
+    Location location = getLocation();
+
+    std::cout << "this piece hasn't been implemented yet\n";
+    return false; // temporary
 }

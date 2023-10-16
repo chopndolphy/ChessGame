@@ -3,7 +3,8 @@
 
 class Bishop : public ChessPiece {
     public:
-        Bishop(std::vector<int> square, Color pieceColor, ChessBoard* board);
-        bool isLegalMove(std::vector<int> square);
+        Bishop(Location square, Color pieceColor, ChessBoard* board);
+        bool isLegalMove(Location square);
+        char getCharacter() const { return 'B'; }
     private:
 };
